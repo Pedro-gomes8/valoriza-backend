@@ -1,6 +1,13 @@
 import express from 'express';
-const app = express();
+import 'reflect-metadata';
+import './database';
+import { router } from './routes';
 
+
+const app = express();
+// Middleware
+app.use(express.json());
+app.use(router);
 /**
  * GET     -> Buscar uma informacao 
  * POST    -> Inserir uma informacao (Criar usuario etc)
@@ -8,15 +15,23 @@ const app = express();
  * DELETE  -> Remover um dado   
  * PATCH   -> Alterar uma informacao especifica
  */
-app.get('/test',(req,res)=>{
-    // req -> Request => Entrando
-    // res -> Response => Saindo
-    return res.send("Ola NLW")
-});
 
-app.post('/post-test',(req,res)=>{
-    return res.send("Hello this is the post method.")
-})
+/**
+ * Tipos de parametros:
+ * Routes Params => parametro de rota ex; localhost:4000/produtos/4857569 - explicito na rota
+ * Query Params => http://localhost:4000/produtos?name=teclado&description=tecladobom& ...  Parametro de Query -> opcional na url
+ * 
+ * Body Params => vem no corpo da requisicao, utiliza-se em PUT, POST, PATCH
+ * {
+ *  "name": "teclado",
+ *  "description": "teclado bom"
+ * }
+ */
+
+
+
+
+
 // Porta que vai executar o projeto
 // localhost:4000
 app.listen(4000,() => console.log("Server is running YOORAY"));
